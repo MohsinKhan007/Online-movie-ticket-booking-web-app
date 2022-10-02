@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const connect = async () => {
-  const mongoConnectionString = "mongodb+srv://MohsinKhan_100:M123456@cluster0.awqlr.mongodb.net/eShop?retryWrites=true&w=majority";
+  const mongoConnectionString = process.env.MONGO_DB_LINK;
   try {
     const opts = {
       useNewUrlParser: true,
