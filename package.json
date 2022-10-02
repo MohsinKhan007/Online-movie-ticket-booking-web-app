@@ -1,0 +1,25 @@
+{
+  "name": "online-e-ticket-booking-app",
+  "version": "1.2.1",
+  "description": "An online movie ticket web application for buying and paying an online payment system ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohsinKhan007/Online-movie-ticket-booking-web-app.git"
+  },
+  "keywords": [
+    "javascript",
+    "mongoDB",
+    "Node.js",
+    "React.Js"
+  ],
+  "author": "Mohsin Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohsinKhan007/Online-movie-ticket-booking-web-app/issues"
+  },
+  "homepage": "https://github.com/MohsinKhan007/Online-movie-ticket-booking-web-app#readme"
+}
