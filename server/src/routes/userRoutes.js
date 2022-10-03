@@ -3,7 +3,8 @@ const {
   signUpUser,
   signInUser,
   fetchUser,
-  signoutUser
+  signoutUser,
+  getUserById
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -12,6 +13,9 @@ router
   .post('/signup', signUpUser)
   .post('/signin', signInUser)
   .get('/signin', fetchUser)
-  .get('/signout', signoutUser);
+  .get('/signout', signoutUser)
+  .get('/profile',getUserById);
+
+
 
 module.exports = router;

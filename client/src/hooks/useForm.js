@@ -86,6 +86,8 @@ const useForm = (callback, validate) => {
                 payload: response.data.data.user.name
               });
               dispatchAuth({ type: 'LOGIN_SUCCESS', payload: true });
+              console.log("check response ",response);
+              dispatchAuth({type:'GET_USERID',payload:response.data.data.user._id})
               history.goBack();
             }
           } catch {

@@ -9,6 +9,8 @@ function AccountMenu({ setAccountShow }) {
   const [authStatus, dispatchAuth] = useContext(AuthContext);
   const [reservation, dispatch] = useContext(ReservationContext);
 
+  console.log("authStatus ",authStatus.userId);
+
   const handleSignOut = () => {
     // Remove JWT token and reset state
     async function userSignOut() {
@@ -37,7 +39,7 @@ function AccountMenu({ setAccountShow }) {
     <div className={classes.nav} style={{height:"auto", right:'10px',top:'50px'}}>
       <ul>
         {/* to={`/showtimings/${movie._id}`} */}
-        {authStatus.isLoggedIn && <Link to={`/profile/${reservation._id}`}>  <li>{`Hi ${reservation.name}`}</li> </Link>}
+        {authStatus.isLoggedIn && <Link to={`/profile/${authStatus.userId}`}>  <li>{`Hi ${reservation.name}`}</li> </Link>}
         {authStatus.isLoggedIn && (
           <li className={classes.sign_out} onClick={handleSignOut}>
             Sign Out

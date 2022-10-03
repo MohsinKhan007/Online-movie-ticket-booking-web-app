@@ -102,6 +102,8 @@ exports.fetchUser = async (req, res, next) => {
     // Check if user still exists
     const currentUser = await User.findById(decoded.id);
 
+    console.log("loggedin user", currentUser);
+
     if (currentUser) {
       res.status(200).json({
         status: 'success',
@@ -120,3 +122,29 @@ exports.signoutUser = (req, res) => {
   res.clearCookie('jwt');
   return res.status(200).json({ status: 'success' });
 };
+
+exports.getUserById=async(req,res)=>{
+
+  const token = req.cookies.jwt;
+  if (!token) {
+    res.status(200).json({
+      status: 'unauthorized'
+    });
+  }
+    else{
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    
+    const user = await User.findById({ _id: decoded.id });
+    console.log("user ",user);
+    
+    res.status(200).json({
+      user
+    })
+
+
+
+    }
+  // const user = await User.findOne({ emailId }).select('+password');
+
+
+}

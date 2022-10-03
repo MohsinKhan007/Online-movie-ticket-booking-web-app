@@ -11,7 +11,7 @@ function Navbar() {
   const [show, handleshow] = useState(false);
   const [accountShow, setAccountShow] = useState(false);
   const [, dispatch] = useContext(ReservationContext);
-  const [, dispatchAuth] = useContext(AuthContext);
+  const [auth, dispatchAuth] = useContext(AuthContext);
   const [showModal, setShowModal] = useState({
     status: false,
     type: "",
@@ -30,7 +30,9 @@ function Navbar() {
     async function fetchUser() {
       try {
         const response = await axios.get("user/signin");
-        console.log(response);
+        
+        console.log("auth user id ",auth.userId);
+
         // Persist login state if user is already logged in and has valid token
         dispatch({
           type: "ADD_EMAIL_ID",
@@ -43,6 +45,7 @@ function Navbar() {
         });
         dispatchAuth({ type: "LOGIN_SUCCESS", payload: true });
       } catch {
+        console.log("PAyload false");
         dispatchAuth({ type: "LOGIN_SUCCESS", payload: false });
       }
     }
@@ -67,12 +70,13 @@ function Navbar() {
 
   return (
     <div style={{padding:'40px'}} className={`nav ${show && "nav_black"}`}>
-      <img
+      <a href="http://localhost:3000"><img
         className="nav_logo"
         // src={movieTimeImg}
         src="https://www.pngitem.com/pimgs/m/113-1133142_transparent-movie-logo-png-png-download.png"
         alt="Simple Cinema app"
       />
+      </a>
 
       <div className="LanguageSelector">
         {/* <LanguageSelector

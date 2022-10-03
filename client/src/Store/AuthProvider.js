@@ -2,7 +2,8 @@ import React, { useReducer } from 'react';
 import AuthContext from './AuthContext';
 
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  userId:null
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,11 @@ const reducer = (state, action) => {
         ...state,
         isLoggedIn: action.payload
       };
+    case 'GET_USERID':
+      return{
+        ...state,
+        userId:action.payload
+      }
     default:
       return state;
   }
