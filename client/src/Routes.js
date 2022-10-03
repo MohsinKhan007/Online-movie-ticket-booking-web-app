@@ -29,8 +29,14 @@ const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
 // Payment failure page
 const PaymentFailure = lazy(() => import('./pages/PaymentFailure'));
 
+//userProfile
+const userProfile=lazy(()=>import('./pages/Profile'))
+
+
 // Page not found 404 page
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+
+
 
 function Routes() {
   return (
@@ -50,6 +56,11 @@ function Routes() {
                   path="/payment-success"
                   exact
                   component={PaymentSuccess}
+                />
+                <Route
+                path="/profile/:userId"
+                exact
+                component={userProfile} 
                 />
                 <Route
                   path="/payment-failure"

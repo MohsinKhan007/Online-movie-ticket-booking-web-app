@@ -52,6 +52,7 @@ export default function Banner() {
   return (
     <>
       <NavBar />
+      <div className=''>
       <Slider {...settings}>
         {movies.map((movie) => {
           return (
@@ -95,6 +96,7 @@ export default function Banner() {
           );
         })}
       </Slider>
+      </div>
       {trailerUrl && (
         <TrailerModal trailerUrl={trailerUrl} setTrailerUrl={setTrailerUrl} />
       )}

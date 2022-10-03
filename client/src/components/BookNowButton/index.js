@@ -18,6 +18,7 @@ function BookNowButton({ movie }) {
       <button
         type="button"
         className={classes.book_btn}
+        style={{fontSize:'1rem',fontWeight:'400',borderRadius:'5px'}}
         onClick={() => handleBookNow(movie)}>
         Book Now
       </button>

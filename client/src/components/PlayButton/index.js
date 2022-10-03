@@ -10,9 +10,10 @@ function PlayButton({ movie, trailerUrl, setTrailerUrl }) {
   return (
     <button
       type="button"
-      className="btn btn-secondary"
+      className="btn btn-success"
+      style={{paddingLeft:'20px',paddingRight:'20px'}}
       onClick={() => handlePlayTrailer(movie, trailerUrl, setTrailerUrl)}>
-      play
+      Play Trailer
     </button>
   );
 }

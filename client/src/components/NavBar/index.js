@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useCallback } from "react";
 
 import "./Navbar.css";
 import AccountMenu from "../AccountMenu";
-import LanguageSelector from "../LanguageSelector";
 import Modal from "../Modal";
 import axios from "../../axios";
 import ReservationContext from "../../Store/ReservationContext";
@@ -31,7 +30,7 @@ function Navbar() {
     async function fetchUser() {
       try {
         const response = await axios.get("user/signin");
-
+        console.log(response);
         // Persist login state if user is already logged in and has valid token
         dispatch({
           type: "ADD_EMAIL_ID",
@@ -84,11 +83,11 @@ function Navbar() {
 
       <button
         type="button"
-        style={{ background: "none", border: "none" }}
+       
         onClick={onclickAccount}
         className="account_style"
       >
-        <p className="nav_avatar">Accounts</p>
+        <p className="nav_avatar  dropdown-toggle">Accounts</p>
         {/* <img
           className="nav_avatar"
           src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/366be133850498.56ba69ac36858.png"

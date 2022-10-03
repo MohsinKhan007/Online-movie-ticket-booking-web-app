@@ -4,7 +4,7 @@
   "description": "An online movie ticket web application for buying and paying an online payment system ",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "dev":"nodemon client/src/index.js"
   },
   "repository": {
     "type": "git",

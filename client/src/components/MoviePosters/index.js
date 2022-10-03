@@ -12,7 +12,7 @@ function MoviePosters({ type, movies, trailerUrl, setTrailerUrl }) {
           <div className={classes.poster_container} key={movie._id}>
             <img
               className={classes.row_poster}
-              src={movie.bannerImage}
+              src={movie.posterImage}
               alt={movie.name}
             />
             <div  className={classes.movie_info}>

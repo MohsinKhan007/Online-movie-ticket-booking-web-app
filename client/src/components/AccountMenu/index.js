@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 import classes from './AccountMenu.module.css';
 import axios from '../../axios';
 import AuthContext from '../../Store/AuthContext';
@@ -34,9 +34,10 @@ function AccountMenu({ setAccountShow }) {
     userSignOut();
   };
   return (
-    <div className={classes.nav} style={{height:"auto"}}>
+    <div className={classes.nav} style={{height:"auto", right:'10px',top:'50px'}}>
       <ul>
-        {authStatus.isLoggedIn && <li>{`Hi ${reservation.name}`}</li>}
+        {/* to={`/showtimings/${movie._id}`} */}
+        {authStatus.isLoggedIn && <Link to={`/profile/${reservation._id}`}>  <li>{`Hi ${reservation.name}`}</li> </Link>}
         {authStatus.isLoggedIn && (
           <li className={classes.sign_out} onClick={handleSignOut}>
             Sign Out
