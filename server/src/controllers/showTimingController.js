@@ -116,7 +116,8 @@ exports.updateShowTiming = async (req, res, next) => {
     next();
     // Go to next middleware for creating stripe checkout seesion
     //stripe session for checkout later
-    // createCheckoutSession(req, res, next);
+    createCheckoutSession(req, res, next);
+    console.log("NOJSS");
   } catch(e) {
     console.log(e);
     next(new AppError('Unable to update showTiming at the moment', 400));

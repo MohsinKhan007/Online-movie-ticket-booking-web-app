@@ -12,7 +12,7 @@ exports.createReservation = async (req, res, next) => {
   try {
     const reservation = new Reservation(req.body);
     await reservation.save();
-
+    console.log("Okay");
     // Update reserved seats in showTiming collection for this specific show
     req.body.reservationId = reservation._id.toString();
     updateShowTiming(req, res, next);

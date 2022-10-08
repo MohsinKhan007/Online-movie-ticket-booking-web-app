@@ -11,8 +11,12 @@ const AppError = require('../utils/appError');
 // To generate a checkout session
 exports.createCheckoutSession = async (req, res, next) => {
   const { movie, totalPrice, emailId, movieImg, reservationId } = req.body;
+  console.log("okayss");
+
+  console.log(req.body);
 
   try {
+    console.log("okayss");
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       customer_email: emailId,
