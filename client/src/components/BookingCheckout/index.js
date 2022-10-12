@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { loadStripe } from '@stripe/stripe-js';
-
+require('dotenv').config();
 import axios from '../../axios';
 
 import classes from './BookingCheckout.module.css';
@@ -12,16 +12,21 @@ import AuthContext from '../../Store/AuthContext';
 import sendEmail from '../../utils/sendEmail';
 import { removeLocalStorage } from '../../utils/localStorage';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY_PUBLISHABLE);
 
 function BookingCheckout({ setShowModal }) {
   const [reservation] = useContext(ReservationContext);
   const [authStatus] = useContext(AuthContext);
-
+  if(setShowModal){
+// console.log("BookingCheckout Component",setShowModal);
+  }
   const { t } = useTranslation();
 
   const handleCheckout = async () => {
     // Check if user has selected seats before checkout
+    console.log("handleCheckout handleCheckout");
+    console.log("STRIPE KEY  ",process.env.REACT_APP_STRIPE_KEY_PUBLISHABLE);
+
     if (reservation.selectedSeats.length === 0) {
       setShowModal({
         status: true,
@@ -30,6 +35,7 @@ function BookingCheckout({ setShowModal }) {
         message: 'select_min_seat_message'
       });
     }
+   
     // Check if user is logged in before checkout
     else if (!authStatus.isLoggedIn) {
       setShowModal({
@@ -40,15 +46,22 @@ function BookingCheckout({ setShowModal }) {
       });
     } else {
       const stripe = await stripePromise;
+      console.log("hello stripe");
       // Create a Stripe session on server and reserve seats
       try {
+        console.log("axios request");
         const response = await axios({
           method: 'post',
           url: '/reservation',
           data: reservation
         });
 
+        console.log(response," response");
+
+        // idr check karna
         const { reservationId, sessionId } = response.data;
+
+        console.log("sessionId   ",sessionId );
 
         // Remove reservation and selected seats from local storage before proceeding to sripe payment
         if (reservationId) {
@@ -56,13 +69,15 @@ function BookingCheckout({ setShowModal }) {
           removeLocalStorage('reservedSeats');
         }
         // Send email to user after ticket has been booked
-        await sendEmail(setShowModal);
+        // check the Email
+        // await sendEmail(setShowModal);
 
         // Redirect to stripe hosted checkout page
         await stripe.redirectToCheckout({
           sessionId
         });
-      } catch {
+      } catch(e) {
+        console.log("BookingCheckout Component", e)
         setShowModal({
           status: true,
           type: 'close',
@@ -85,43 +100,15 @@ function BookingCheckout({ setShowModal }) {
           <button
             className={classes.checkout_button}
             type="button"
-            // onClick={handleCheckout}
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            onClick={handleCheckout}
+            // data-bs-toggle="modal"
+            // data-bs-target="#exampleModal"
           >
             checkout
           </button>
         </Link>
 
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              {/* <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div> */}
-              <div class="modal-body text-center">
-                <h6 className="text-success fs-1">
-                  Your Ticket Booked Successfully
-                </h6>
-                {/* swal("Good job!", "You clicked the button!", "success") */}
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );

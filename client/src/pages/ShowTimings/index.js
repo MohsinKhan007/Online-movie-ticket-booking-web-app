@@ -50,11 +50,11 @@ function ShowTimings(props) {
     async function fetchData() {
       try {
 
-        console.log("check",await axios.get(`/show-timing/${movieId}`, {
-          params: {
-            selectedDate: reservation.date.format('YYYY-MM-DD')
-          }
-        }));
+        // console.log("check",await axios.get(`/show-timing/${movieId}`, {
+        //   params: {
+        //     selectedDate: reservation.date.format('YYYY-MM-DD')
+        //   }
+        // }));
 
         const response = await axios.get(`/show-timing/${movieId}`, {
           params: {

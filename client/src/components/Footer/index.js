@@ -43,6 +43,7 @@ const Footer = () => {
         <li>
           <a
             href="https://www.facebook.com"
+            data-testid="facebookLink"
             target="-blank"
             className={classes.footer_icon}>
             <FaFacebook />
@@ -52,6 +53,7 @@ const Footer = () => {
         <li>
           <a
             href="https://www.twitter.com"
+            data-testid="twitterLink"
             target="-blank"
             className={classes.footer_icon}>
             <FaTwitter />
@@ -61,6 +63,7 @@ const Footer = () => {
         <li>
           <a
             href="https://www.instagram.com"
+            data-testid="instagramLink"
             target="-blank"
             className={classes.footer_icon}>
             <FaInstagram />
@@ -70,6 +73,7 @@ const Footer = () => {
         <li>
           <a
             href="https://www.linkedin.com"
+            data-testid="linkedinLink"
             target="-blank"
             className={classes.footer_icon}>
             <FaLinkedin />

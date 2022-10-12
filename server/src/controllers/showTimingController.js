@@ -112,12 +112,12 @@ exports.updateShowTiming = async (req, res, next) => {
       { $push: { reservedSeats: req.body.selectedSeats } }
     );
 
-    console.log("update Show Timmings");
-    next();
+    console.log("update Show Timmings controller");
+    // next();
     // Go to next middleware for creating stripe checkout seesion
     //stripe session for checkout later
     createCheckoutSession(req, res, next);
-    console.log("NOJSS");
+    // console.log("NOJSS");
   } catch(e) {
     console.log(e);
     next(new AppError('Unable to update showTiming at the moment', 400));

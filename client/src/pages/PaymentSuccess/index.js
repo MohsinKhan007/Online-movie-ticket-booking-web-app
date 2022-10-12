@@ -24,6 +24,8 @@ function PaymentSuccess() {
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
 
+  console.log(sessionId,"Sucessful check");
+
   useEffect(() => {
     const getReservation = async () => {
       try {
@@ -35,7 +37,11 @@ function PaymentSuccess() {
           ...response.data.reservation,
           date: moment(response.data.reservation.date)
         });
-      } catch {
+      } catch(e) {
+
+        console.log("Error  PaymentSucess  ",e)
+
+
         setShowModal({
           status: true,
           type: 'close',

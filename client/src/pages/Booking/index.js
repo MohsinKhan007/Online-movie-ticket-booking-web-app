@@ -64,6 +64,7 @@ function Booking() {
           <div className={classes.screen} />
         </div>
         <div className={classes.seat_layout}>
+          {/* isssue is in seatLayout meaning in reservedSeats  */}
           <SeatLayout
             reservedSeats={reservedSeats}
             setShowModal={setShowModal}

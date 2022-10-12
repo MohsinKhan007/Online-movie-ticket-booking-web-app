@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import classes from './Cinemas.module.css';
 import ReservationContext from '../../Store/ReservationContext';
 
+
 function Cinemas({ cinemas, selectScreen }) {
-  const [, dispatch] = useContext(ReservationContext);
+  const [, dispatch] = useContext(ReservationContext);  
   let newCinemas = [...cinemas];
 
  
@@ -42,8 +43,8 @@ function Cinemas({ cinemas, selectScreen }) {
                 src={cinema.image}
                 alt={cinema.name}
               />
-              <div className={classes.movie_info}>
-                <h3>{`${cinema.name}, ${cinema.city} `}</h3>
+              <div data-testid="cinemaName" className={classes.movie_info}>
+                <h3  data-testid="cinemaCity" >{`${cinema.name}, ${cinema.city} `}</h3>
                 <h4>show_time:`${cinema.startAt}`</h4>
               </div>
               <Link to="/booking">

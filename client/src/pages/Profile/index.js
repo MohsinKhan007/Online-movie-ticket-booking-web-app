@@ -1,8 +1,9 @@
 import React, { useEffect,useState } from 'react';
+
 import axios from '../../axios';
 import Navbar from '../../components/NavBar';
 import "./profile.css";
-function Profile(props) {
+function Profile({user}) {
 
     const [userData,setUserData]=useState({
         name:'',
@@ -12,22 +13,31 @@ function Profile(props) {
     })
     
     useEffect(()=>{
-
+      
         const fetchUser= async()=>{
+          if(!user){
             const data= await axios({
                 method: 'get',
                 url: '/user/profile'
               });
             //   console.log(data);
-              const user=data.data.user;
+              const userCheck=data.data.user;
               console.log("USer ",user);
               setUserData({
-                name:user.name,
-                emailId:user.emailId,
-                role:user.role
+                name:userCheck.name,
+                emailId:userCheck.emailId,
+                role:userCheck.role
               })
         }
-
+        else{
+        setUserData({
+          name:user.name,
+          emailId:user.emailId,
+          role:user.role
+        })
+        }
+      }//user
+    
         fetchUser();
     },[])
 
@@ -49,6 +59,8 @@ function Profile(props) {
           <div className="form_inputs">
             <label className="form_label">Name</label>
             <input
+              //get testing id
+              data-testid={`name`}
               className="form_input"
               type="text"
               name="name"
@@ -61,7 +73,8 @@ function Profile(props) {
           <div className="form_inputs">
             <label className="form_label">Email</label>
             <input
-              
+              //get testing id  
+              data-testid={`emailId`}
               className="form_input"
               style={{color:'white'}}
               type="email"
@@ -76,7 +89,7 @@ function Profile(props) {
           <div className="form_inputs">
             <label className="form_label">Logged in As:</label>
             <input
-              
+              data-testid={`userId`}
               className="form_input"
               style={{color:'white'}}
               type="text"

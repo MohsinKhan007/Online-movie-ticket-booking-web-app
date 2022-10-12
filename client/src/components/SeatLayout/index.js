@@ -9,6 +9,7 @@ function SeatLayout({ reservedSeats, setShowModal }) {
   useEffect(() => {
 
       console.log(reservation," reservation check");
+
     const localReservation = getLocalStorage('reservation', {});
     if (!reservation.seatLayout.row0) {
       dispatch({
@@ -20,6 +21,7 @@ function SeatLayout({ reservedSeats, setShowModal }) {
 
   // User should not be able to select more than 5 seats or reserved seats
   const handleSeatSelect = (e) => {
+    console.log('sss');
     if (e.target.classList.contains('unavailable')) return;
     if (
       reservation.selectedSeats.length === 5 &&
