@@ -61,14 +61,14 @@ function BookingCheckout({ setShowModal }) {
         // idr check karna
         const { reservationId, sessionId } = response.data;
 
-        console.log("sessionId   ",sessionId );
+        console.log("reservation Id   ",reservationId );
 
         // Remove reservation and selected seats from local storage before proceeding to sripe payment
         if (reservationId) {
           removeLocalStorage('reservation');
           removeLocalStorage('reservedSeats');
         }
-        // Send email to user after ticket has been booked
+        // Send email txo user after ticket has been booked
         // check the Email
         // await sendEmail(setShowModal);
 
@@ -82,7 +82,7 @@ function BookingCheckout({ setShowModal }) {
           status: true,
           type: 'close',
           subject: 'error',
-          message: 'something_wrong'
+          message: 'Something Wrong'
         });
       }
     }

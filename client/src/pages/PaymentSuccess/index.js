@@ -26,6 +26,8 @@ function PaymentSuccess() {
 
   console.log(sessionId,"Sucessful check");
 
+
+
   useEffect(() => {
     const getReservation = async () => {
       try {
@@ -58,11 +60,13 @@ function PaymentSuccess() {
       {reservation && (
         <div className={classes.message}>
           <h4>
-            hi
+            Hi!
             <span>{` ${reservation.name}`}</span>
           </h4>
-          <p>payment_success</p>
-          <p>thanks_RED_Cinemas</p>
+          <p>Payment sucessfully received</p>
+          <p>Thanks By Simple Movie App</p>
+          <p>Print your e-ticket by click ctrl+p and downloading as pdf</p>
+          <p>You Unique Ticket Id: {Math.floor(100000000 + Math.random() * 900000000)}</p>
         </div>
       )}
       <div className={classes.movie_ticket}>

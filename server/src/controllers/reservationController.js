@@ -10,12 +10,56 @@ const { updateShowTiming } = require('./showTimingController');
 exports.createReservation = async (req, res, next) => {
   req.body.date = new Date(req.body.date);
   try {
-    const reservation = new Reservation(req.body);
-    await reservation.save();
-    console.log("Okay");
-    // Update reserved seats in showTiming collection for this specific show
-    req.body.reservationId = reservation._id.toString();
-    updateShowTiming(req, res, next);
+    console.log("Body of reservation saved");
+    console.log(req.body);
+
+    const totalSeats=req.body.selectedSeats.length;
+
+    const reservationObject={
+      date:req.body.date,
+      startAt :req.body.startAt,
+      selectedSeats: req.body.selectedSeats,
+      totalSeats:totalSeats,
+      movieId: req.body.movieId ,
+      movie: req.body.movie,
+      screenId :req.body.screenId,
+      selectedCinema :req.body.selectedCinema,
+      totalPrice:req.body.totalPrice,
+      name:req.body.name,
+      emailId:req.body.emailId,
+      paymentStatus:req.body.paymentStatus
+    };
+    
+  
+    const reservation = new Reservation(reservationObject);
+
+    reservation.save((err,doc)=>{
+      if(err|| !doc){
+        next(new AppError('Unable to reserve at the moment', 400));
+      }
+      else{
+
+        console.log("Create reservation called");
+        // Update reserved seats in showTiming collection for this specific show
+    
+        console.log(req.body.reservationId," Newly made reservation ID");
+    
+        req.body.reservationId = reservation._id.toString();
+        updateShowTiming(req, res, next);
+        console.log("added sucessfully");
+
+
+        console.log("reservation");
+        console.log(reservation);
+
+
+      }
+    });
+
+    // if(await reservation.save()){
+    //   console.log("reservation saved");
+    // }
+
   } catch(e){
     console.log(e);
     next(new AppError('Unable to reserve at the moment', 400));
@@ -24,29 +68,41 @@ exports.createReservation = async (req, res, next) => {
 
 // To get all reservations of a user
 exports.getAllReservations = async (req, res, next) => {
+
+  console.log("hello");
+
   const { startAt, screenId, date } = req.query;
+  console.log(new Date(req.query.date)," Date");
+  console.log(new Date(date)," Date");
   try {
     const reservations = await Reservation.find({
       startAt: { $eq: startAt },
       screenId: { $eq: screenId },
-      date: new Date(date)
+      // date: new Date(date)
     }).exec();
     res.status(200).json({
       status: 'success',
       reservations
     });
-  } catch {
+  } catch (e){
+    console.log(e);
     next(new AppError('Unable to fetch reservations at the moment', 400));
   }
 };
 
 // To get reservation based on checkout session id
 exports.getReservation = async (req, res, next) => {
-  const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
+
+  console.log(req.params," PArams");
+
+  // console.log("get reservation by sessiion");
+
+
+  // const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
 
   try {
     const reservation = await Reservation.findById(
-      ObjectId(session.client_reference_id)
+      req.params.sessionId
     );
     res.status(200).json({
       reservation
