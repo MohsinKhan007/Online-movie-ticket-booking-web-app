@@ -90,9 +90,11 @@ function EditMovie(props){
 
       if(response.data.status=='success'){
         alert("Movie Data is Changed SucessFully");
+        window.location.replace('http://localhost:3000/movies');
       }
       else{
         alert("An Error occured is Changed");
+        window.location.replace('http://localhost:3000/movies');
       }
       // console.log();
 

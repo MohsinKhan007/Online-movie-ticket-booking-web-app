@@ -4,6 +4,7 @@ import React, { useEffect,useState,useContext } from 'react'
 import ReservationContext from '../../Store/ReservationContext';
 import AuthContext from '../../Store/AuthContext';
 require('dotenv').config();
+import truncate from '../../utils/truncate';
 import axios from '../../axios';
 import {Redirect,Route} from 'react-router-dom';
 import './Movies.css';
@@ -104,7 +105,7 @@ function MoviesPage(){
           <Card.Body style={{height:'130px'}}>
             <Card.Title>{movie.title}</Card.Title>
             <Card.Text>
-              {movie.description.en}
+            {truncate(movie.description.en, 100)}
             </Card.Text>
           </Card.Body>
           </Link>
