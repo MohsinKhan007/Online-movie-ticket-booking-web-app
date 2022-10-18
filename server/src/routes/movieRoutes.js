@@ -4,7 +4,8 @@ const {
   getMovies,
   updateMovie,
   getMovie,
-  deleteMovie
+  deleteMovie,
+  getAllMovies
 } = require('../controllers/movieController');
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router
   .post('/', addMovie)
   .patch('/:movieId', updateMovie)
   .get('/:movieId', getMovie)
-  .delete('/:movieId',deleteMovie);
+  .delete('/:movieId',deleteMovie)
+  .put('/getAllMovies',getAllMovies);
 module.exports = router;

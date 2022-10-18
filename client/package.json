@@ -9,7 +9,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
+    "bootstrap": "^5.2.2",
     "dotenv": "^8.6.0",
+    "emailjs": "^4.0.1",
     "emailjs-com": "^2.6.4",
     "i18next": "^19.8.3",
     "i18next-browser-languagedetector": "^6.0.1",
@@ -17,7 +19,10 @@
     "moment": "^2.29.1",
     "movie-trailer": "^2.0.6",
     "react": "^17.0.1",
+    "react-bootstrap": "^2.5.0",
+    "react-bootstrap-date-picker": "^5.1.0",
     "react-dates": "^21.8.0",
+    "react-datetime-picker": "^4.0.1",
     "react-dom": "^17.0.1",
     "react-i18next": "^11.7.3",
     "react-icons": "^4.1.0",
@@ -29,12 +34,13 @@
     "react-youtube": "^7.13.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts  test ",
     "eject": "react-scripts eject"
   },
   "browserslist": {

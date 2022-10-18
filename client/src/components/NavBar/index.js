@@ -7,7 +7,7 @@ import axios from "../../axios";
 import ReservationContext from "../../Store/ReservationContext";
 import AuthContext from "../../Store/AuthContext";
 
-function Navbar() {
+function Navbar(props) {
   const [show, handleshow] = useState(false);
   const [accountShow, setAccountShow] = useState(false);
   const [, dispatch] = useContext(ReservationContext);
@@ -32,6 +32,7 @@ function Navbar() {
         const response = await axios.get("user/signin");
         
         console.log("auth user id ",auth.userId);
+        console.log(auth.role,"Role");
 
         // Persist login state if user is already logged in and has valid token
         dispatch({

@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import classes from './PaymentFailure.module.css';
 
 function PaymentFailure() {
-  const { t } = useTranslation();
+ 
 
   return (
     <div className={classes.container}>
       <div className={classes.message}>
-        <p>payment_failed</p>
-        <p>try_again</p>
+        <p>Payment_failed</p>
+        <p>Try Again</p>
       </div>
 
       <div className={classes.close_button}>

@@ -1,0 +1,42 @@
+.Movie-page{
+
+    color:black;
+    margin-top: 40px;
+
+}
+
+.CardImage{
+
+    margin-top: 10px;
+    width: 263px;
+    width: auto;
+    border-radius: 5px;
+}
+
+
+.EditMovies-Container{
+    color:black;
+    background-color: whitesmoke;
+    padding: 40px;
+    border-radius: 10px;
+}
+.Card-Body-Flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Card-Body-Flex button{
+    height: fit-content;
+}
+
+.Card-Link-Body{
+all: inherit;
+border: none;
+margin: 0px;
+padding: 0;
+cursor: pointer;
+
+}
+.Card-Link-Body:hover{
+    color: black;
+}

@@ -3,7 +3,8 @@ import AuthContext from './AuthContext';
 
 const initialState = {
   isLoggedIn: false,
-  userId:null
+  userId:null,
+  role:''
 };
 
 const reducer = (state, action) => {
@@ -28,6 +29,11 @@ const reducer = (state, action) => {
         ...state,
         userId:action.payload
       }
+    case 'GET_USER_ROLE':
+      return{
+        ...state,
+        role:action.payload
+      }  
     default:
       return state;
   }

@@ -5,40 +5,33 @@ import Navbar from '../../components/NavBar';
 import "./profile.css";
 function Profile({user}) {
 
-    const [userData,setUserData]=useState({
-        name:'',
-        emailId:'',
-        role:'',
-        password:''
-    })
+    const [userData,setUserData]=useState(user?user:{});
     
+    // console.log(userData," User Data", user);
+
+    // console.log
     useEffect(()=>{
       
         const fetchUser= async()=>{
-          if(!user){
+
             const data= await axios({
                 method: 'get',
                 url: '/user/profile'
               });
-            //   console.log(data);
+              console.log("ider ");
               const userCheck=data.data.user;
               console.log("USer ",user);
+              console.log("Ide ayay");
               setUserData({
                 name:userCheck.name,
                 emailId:userCheck.emailId,
                 role:userCheck.role
               })
         }
-        else{
-        setUserData({
-          name:user.name,
-          emailId:user.emailId,
-          role:user.role
-        })
-        }
-      }//user
-    
+  
+      if(!userData || Object.keys(userData).length===0 ){
         fetchUser();
+      }
     },[])
 
     return (
@@ -65,13 +58,15 @@ function Profile({user}) {
               type="text"
               name="name"
               style={{color:'white'}}
-              value={userData.name}
+              value={user?user.name:userData.name}
               disabled  
             />
             {/* {errors.name && <p>{errors.name}</p>} */}
           </div>
+
+        
           <div className="form_inputs">
-            <label className="form_label">Email</label>
+            <label className="form_label">Email </label>
             <input
               //get testing id  
               data-testid={`emailId`}
@@ -80,7 +75,7 @@ function Profile({user}) {
               type="email"
               name="emailId"
              
-              value={userData.emailId}
+              value={user?user.emailId:userData.emailId}
               
               disabled         
             />
@@ -89,13 +84,13 @@ function Profile({user}) {
           <div className="form_inputs">
             <label className="form_label">Logged in As:</label>
             <input
-              data-testid={`userId`}
+              data-testid={`role`}
               className="form_input"
               style={{color:'white'}}
               type="text"
               name="role"
              
-              value={userData.role}
+              value={user?user.role:userData.role}
               
               disabled         
             />

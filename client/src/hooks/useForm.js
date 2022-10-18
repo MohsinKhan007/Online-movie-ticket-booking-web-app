@@ -88,6 +88,11 @@ const useForm = (callback, validate) => {
               dispatchAuth({ type: 'LOGIN_SUCCESS', payload: true });
               console.log("check response ",response);
               dispatchAuth({type:'GET_USERID',payload:response.data.data.user._id})
+              dispatchAuth({type:'GET_USER_ROLE',payload:response.data.data.user.role});
+
+              localStorage.setItem("user_id",response.data.data.user._id);
+              localStorage.setItem('user_role',response.data.data.user.role);
+
               history.goBack();
             }
           } catch {

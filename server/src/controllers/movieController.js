@@ -1,3 +1,4 @@
+// const { default: MoviesPage } = require('../../../client/src/pages/Movies');
 const Movie = require('../models/movie');
 const AppError = require('../utils/appError');
 
@@ -14,9 +15,36 @@ exports.addMovie = async (req, res, next) => {
     });
   } catch(e) {
     console.log(e);
+    res.status(500).json({
+      status:'error',
+      error:e
+    })
     next(new AppError('Unable to create movie at the moment', 400));
   }
 };
+
+exports.getAllMovies=async (req,res,next)=>{
+
+  try{
+    console.log("All Movies")
+    const movie=await Movie.find();
+    
+    res.status(200).json({
+      movie,
+      status:"Sucess"
+      
+    })
+  }
+  catch(e){
+    console.log(e);
+    res.status(500).json({
+      status:'An error occured. Try Again later'
+    })
+  }
+
+}
+
+
 
 // To get movies
 exports.getMovies = async (req, res, next) => {
@@ -43,7 +71,8 @@ exports.getMovies = async (req, res, next) => {
       status: 'success',
       movies
     });
-  } catch {
+  } catch(e) {
+    console.log("+++++  ",e);
     next(new AppError('Unable to fetch movies at the moment', 400));
   }
 };
@@ -51,6 +80,9 @@ exports.getMovies = async (req, res, next) => {
 // To update a movie
 exports.updateMovie = async (req, res, next) => {
   try {
+
+    console.log(req.body," Body ");
+
     await Movie.updateOne({ _id: req.params.movieId }, { $set: req.body });
     res.status(200).json({
       status: 'success'
@@ -64,14 +96,8 @@ exports.updateMovie = async (req, res, next) => {
 exports.getMovie = async (req, res, next) => {
   try {
     console.log("ide aaya hai");
-
-    
-
     const movie = await Movie.findById({ _id: req.params.movieId });
-
     console.log(movie);
-
-
     res.status(200).json({
       status: 'success',
       movie

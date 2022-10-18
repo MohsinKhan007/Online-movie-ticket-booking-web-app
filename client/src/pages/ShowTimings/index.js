@@ -10,10 +10,10 @@ import Modal from '../../components/Modal';
 import Footer from '../../components/Footer';
 import { setLocalStorage } from '../../utils/localStorage';
 import truncate from '../../utils/truncate';
-
+// now pass cinemas data in this and 
 function ShowTimings(props) {
   const [reservation] = useContext(ReservationContext);
-  const [cinemas, setCinemas] = useState([]);
+  const [cinemas, setCinemas] = useState(props.cinemas?props.cinemas:[]);
   const [selectScreen, setSelectScreen] = useState('All Screens');
   const [showModal, setShowModal] = useState({
     status: false,
@@ -21,11 +21,27 @@ function ShowTimings(props) {
     subject: '',
     message: ''
   });
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState(props.movie?props.movie:{});
 
-  const { movieId } = props.match.params;
+  // const { movieId } = props.match.params;
+  const movieId=props.match? props.match.params.movieId:(props.movieId);
+  
+  // console.log(movieId," Movie Id");
 
-  // Set local storage with banner image
+
+
+if(!props.match){
+
+
+  reservation.emailId="mohsinkhan0104@gmail.com",
+  reservation.movie="The Gray Man",
+  reservation.movieId="632d478b24abee245821ee09",
+  reservation.movieImg="https://i.ibb.co/9493V21/1232204.jpg",
+  reservation.name="https://i.ibb.co/9493V21/1232204.jpg"
+};
+
+
+
   useEffect(() => {
     setLocalStorage('reservation', reservation);
 
@@ -42,7 +58,9 @@ function ShowTimings(props) {
         });
       }
     }
+    if(!movie || Object.keys(movie).length===0 ){
     fetchMovie();
+  }
   }, []);
 
   // Fetch Show timing based on user's date selection
@@ -62,9 +80,7 @@ function ShowTimings(props) {
           }
         });
 
-        console.log("response   ",response);
-
-        console.log(response.data.showTimings);
+      
 
         // Error modal if there are no shows available
         if (response.data.showTimings.length === 0) {
@@ -118,16 +134,17 @@ function ShowTimings(props) {
         }}>
         {movie && (
           <div className={classes.banner_contents}>
-            <h1 className={classes.banner_title}>{reservation.movie}</h1>
+            <h1 data-testid="name" className={classes.banner_title}>{reservation.movie}</h1>
             <div className={classes.movie_info}>
               <h1 className={classes.movie_description}>
                 {movie.description && truncate(movie.description.en, 150)}
               </h1>
-              <h1 className="movie_desc_text">{`Director: ${movie.director}`}</h1>
-              <h1 className="movie_desc_text">{`Genre: ${movie.genre}`}</h1>
-              <h1 className="movie_desc_text">{`Cast: ${movie.cast}`}</h1>
-              <h1 className="movie_desc_text">{`Language: ${movie.originalLanguage}`}</h1>
-              <h1 className="movie_desc_text">{`Duration: ${movie.duration}`}</h1>
+              {/* <h1 className="movie_desc_text">{`Director: ${movie.director}`}</h1> */}
+              {/* <h1 data-testid="director" style={{fontSize:'1.5rem'}} className="movie_desc_text">{`Director: ${movie.director}`}</h1> */}
+              <h1 data-testid="genre" style={{fontSize:'1.5rem'}} className="movie_desc_text">Genre {movie.genre}</h1>
+              <h1 data-testid="cast" style={{fontSize:'1.5rem',width:'176%'}} className="movie_desc_text">{`Cast: ${movie.cast}`}</h1>
+              <h1 data-testid="originalLanguage" style={{fontSize:'1.5rem'}} className="movie_desc_text">{`Language: ${movie.originalLanguage}`}</h1>
+              <h1 data-testid="duration" style={{fontSize:'1.5rem'}} className="movie_desc_text">{`Duration: ${movie.duration}`}</h1>
             </div>
           </div>
         )}

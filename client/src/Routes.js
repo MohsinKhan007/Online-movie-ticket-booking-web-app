@@ -7,6 +7,7 @@ import ReservationProvider from './Store/ReservationProvider';
 import AuthProvider from './Store/AuthProvider';
 
 import './App.css';
+// import EditMovie from './pages/Movies/EditMovie';
 
 // Home page
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -33,6 +34,10 @@ const PaymentFailure = lazy(() => import('./pages/PaymentFailure'));
 const userProfile=lazy(()=>import('./pages/Profile'))
 
 
+const MoviesPage=lazy(()=>import('./pages/Movies'));
+const EditMovie=lazy(()=>import('./pages/Movies/EditMovie'));
+const CreateMovie=lazy(()=>import('./pages/Movies/CreateMovie'));
+const ViewMovies=lazy(()=>import('./pages/Movies/ViewMovie'));
 // Page not found 404 page
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
@@ -52,13 +57,17 @@ function Routes() {
                 <Route path="/signin" exact component={Form} />
                 <Route path="/signup" exact component={Form} />
                 <Route path="/booking" exact component={Booking} />
+                <Route path ="/movies" exact component={MoviesPage} />
+                <Route path='/edit-movie/:movieId' exact component={EditMovie}/>
+                <Route path='/create-movie' component={CreateMovie} />
+                <Route path='/view-movie/:movieId' component={ViewMovies} />
                 <Route
                   path="/payment-success"
                   exact
                   component={PaymentSuccess}
                 />
                 <Route
-                path="/profile/:userId"
+                path="/profile"
                 exact
                 component={userProfile} 
                 />

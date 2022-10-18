@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import classes from './ScreenSelector.module.css';
 
 function ScreenSelector({ cinemas, setSelectScreen }) {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   let cinemaNames = cinemas.map((cinema) => {
     return cinema.name;
   });

@@ -9,7 +9,10 @@ function AccountMenu({ setAccountShow }) {
   const [authStatus, dispatchAuth] = useContext(AuthContext);
   const [reservation, dispatch] = useContext(ReservationContext);
 
-  console.log("authStatus ",authStatus.userId);
+  // console.log("authStatus ",authStatus.userId);
+
+  // console.log("AuthStatus",authStatus.role);
+
 
   const handleSignOut = () => {
     // Remove JWT token and reset state
@@ -28,23 +31,29 @@ function AccountMenu({ setAccountShow }) {
           payload: ''
         });
         dispatchAuth({ type: 'LOGOUT_SUCCESS', payload: false });
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('user_role');
         setAccountShow(false);
       } catch {
         dispatchAuth({ type: 'LOGOUT_SUCCESS', payload: true });
       }
     }
     userSignOut();
+    alert('User is signout Sucessfully');
+    window.location.replace('http://localhost:3000/');
   };
   return (
     <div className={classes.nav} style={{height:"auto", right:'10px',top:'50px'}}>
       <ul>
         {/* to={`/showtimings/${movie._id}`} */}
-        {authStatus.isLoggedIn && <Link to={`/profile/${authStatus.userId}`}>  <li>{`Hi ${reservation.name}`}</li> </Link>}
+        {authStatus.isLoggedIn && <Link to={`/profile`}>  <li>{`Hi ${reservation.name}`}</li> </Link>}
+        {authStatus.isLoggedIn && (localStorage.getItem('user_role')==='admin')  &&(<Link to={`movies`}><li>Manage Movies </li></Link> ) }
         {authStatus.isLoggedIn && (
           <li className={classes.sign_out} onClick={handleSignOut}>
             Sign Out
           </li>
         )}
+       
         {!authStatus.isLoggedIn && (
           <li>
             <NavLink to="/signin">Sign In</NavLink>

@@ -32,7 +32,7 @@ function BookingCheckout({ setShowModal }) {
         status: true,
         type: 'close',
         subject: 'Info',
-        message: 'select_min_seat_message'
+        message: 'Select Min Seat Message'
       });
     }
    
@@ -42,9 +42,18 @@ function BookingCheckout({ setShowModal }) {
         status: true,
         type: 'sign_in',
         subject: 'Info',
-        message: 'not_signedin_message'
+        message: 'Not signedIn Message'
       });
-    } else {
+    } 
+    else if((authStatus.role==='admin') || localStorage.getItem('user_role')==='admin' ){
+      setShowModal({
+        status:true,
+        type:'sign_in',
+        subject:'Info',
+        message:"Admin cannot reserve tickets"
+      })
+    }
+    else {
       const stripe = await stripePromise;
       console.log("hello stripe");
       // Create a Stripe session on server and reserve seats
