@@ -30,8 +30,9 @@ Online Movie Ticket Reservation uses a number of open source projects to work pr
 - [React.js] - HTML enhanced for web apps!
 - [Twitter Bootstrap] - great UI boilerplate for modern web apps
 - [node.js] - evented I/O for the backend
-- [Express] - fast node.js network app framework 
+- [Express.js] - fast node.js network app framework 
 - [Mongodb] - the streaming build system
+- [stripe] - for online payment method system
 - [JEST,react-testing-library]- React Library for testing apps
 
 And of course  itself is open source with a [public repository][dill]
@@ -47,6 +48,7 @@ Install the dependencies and devDependencies and start the server.
 Go to Github repo folder
 cd server
 npm i
+add .env file for enviorment variables
 npm run dev
 ```
 ## Installation of client
@@ -54,6 +56,7 @@ npm run dev
 Go to Github repo folder
 cd client
 npm i 
+add .env file for enviorment variables
 npm start
 ```
 
