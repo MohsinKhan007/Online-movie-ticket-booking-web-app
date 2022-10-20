@@ -69,6 +69,14 @@ function CreateMovie(){
     }
 
     const handleSubmit=async(e)=>{
+
+        e.preventDefault();
+      if(movie.releaseDate.getTime()>=movie.endDate.getTime()){
+        alert("Movie Release cannot be after the end Date");
+        return 0;
+      }
+
+
       try{
         e.preventDefault();
         const response=await axios({

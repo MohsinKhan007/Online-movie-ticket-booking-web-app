@@ -81,6 +81,16 @@ function EditMovie(props){
       e.preventDefault();
 
      
+      console.log(movie.releaseDate.getTime()," Release Date");
+      console.log(movie.endDate.getTime()," EndDate");
+
+      if(movie.releaseDate.getTime()>=movie.endDate.getTime()){
+        alert("Movie Release cannot be after the end Date");
+        return 0;
+      }
+
+       
+
 
       const response=await axios({
         method:'patch',
