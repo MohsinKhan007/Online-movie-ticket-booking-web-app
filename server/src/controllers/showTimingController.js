@@ -11,7 +11,7 @@ exports.addShowTiming = async (req, res, next) => {
   req.body.date = new Date(req.body.date);
 
 
-  console.log(req.body," Body check");
+  
 
   try {
     const showTiming = new ShowTiming(req.body);
@@ -57,6 +57,35 @@ exports.getReservedSeats = async (req, res, next) => {
     next(new AppError('Unable to fetch reservations at the moment', 400));
   }
 };
+
+
+exports.deleteShowTiming=async(req,res,next)=>{
+  console.log(req.params.showTimingId," Body check");
+try{
+  const ShowTimingDelete=await ShowTiming.deleteOne({_id:req.params.showTimingId})
+  console.log(req.body," Body check");
+  res.status(200).json({
+    status:"sucess"
+  })
+
+}
+
+catch(e){
+  console.log(e);
+  res.status(501).json({
+    error:e,
+    status:"Internal server error"
+  })
+}
+
+
+
+
+
+
+
+}
+
 
 // To get showtimings and screens based on movie id
 exports.getShowTimings = async (req, res, next) => {

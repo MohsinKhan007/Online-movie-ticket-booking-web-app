@@ -4,7 +4,8 @@ const {
   getAllShowTimings,
   getReservedSeats,
   getShowTimings,
-  updateShowTiming
+  updateShowTiming,
+  deleteShowTiming
 } = require('../controllers/showTimingController');
 
 const router = express.Router();
@@ -14,7 +15,9 @@ router
   .get('/reserved-seats', getReservedSeats)
   .get('/:movieId', getShowTimings)
   .post('/', addShowTiming)
-  .patch('/:showTimingId', updateShowTiming);
+  .patch('/:showTimingId', updateShowTiming)
+  .delete('/:showTimingId',deleteShowTiming) 
+  ;
 
 module.exports = router;
 
